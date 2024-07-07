@@ -10,7 +10,6 @@ import simulation
 import genome 
 import creature 
 import numpy as np
-import os
 
 class TestGA(unittest.TestCase):
     def testBasicGA(self):
@@ -18,9 +17,6 @@ class TestGA(unittest.TestCase):
                                     gene_count=3)
         #sim = simulation.ThreadedSim(pool_size=1)
         sim = simulation.Simulation()
-
-        if not os.path.exists("elite"):   ## added
-            os.makedirs("elite")
 
         for iteration in range(1000):
             # this is a non-threaded version 
@@ -57,7 +53,7 @@ class TestGA(unittest.TestCase):
                     new_cr = creature.Creature(1)
                     new_cr.update_dna(cr.dna)
                     new_creatures[0] = new_cr
-                    filename = "elite/"+str(iteration)+".csv"
+                    filename = "elite_"+str(iteration)+".csv"
                     genome.Genome.to_csv(cr.dna, filename)
                     break
             

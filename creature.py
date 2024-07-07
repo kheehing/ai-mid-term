@@ -40,7 +40,6 @@ class Creature:
         self.motors = None
         self.start_position = None
         self.last_position = None
-        self.highest_non_flying_position = None  ## added
 
     def get_flat_links(self):
         if self.flat_links == None:
@@ -88,16 +87,11 @@ class Creature:
             self.motors = motors 
         return self.motors 
     
-    def update_position(self, pos, is_flying=False): ## editted
+    def update_position(self, pos):
         if self.start_position == None:
             self.start_position = pos
         else:
             self.last_position = pos
-
-        if not is_flying:  ##  added
-            if (self.highest_non_flying_position is None or 
-                pos[2] > self.highest_non_flying_position[2]):
-                self.highest_non_flying_position = pos
 
     def get_distance_travelled(self):
         if self.start_position is None or self.last_position is None:
@@ -107,9 +101,6 @@ class Creature:
         dist = np.linalg.norm(p1-p2)
         return dist 
 
-    def get_highest_non_flying_position(self):
-            return self.highest_non_flying_position
-
     def update_dna(self, dna):
         self.dna = dna
         self.flat_links = None
@@ -117,4 +108,3 @@ class Creature:
         self.motors = None
         self.start_position = None
         self.last_position = None
-        self.highest_non_flying_position = None
